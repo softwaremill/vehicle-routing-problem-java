@@ -1,0 +1,154 @@
+{
+  "vehicles": [
+    {
+      "id": "vehicle-1",
+      "startLocation": {
+        "lat": 54.374739,
+        "lon": 18.516659
+      },
+      "endLocation": {
+        "lat": 54.374739,
+        "lon": 18.516659
+      },
+      "timeWindow": {
+        "start": "2022-01-01T08:00:00Z",
+        "end": "2022-01-01T16:00:00Z"
+      }
+    }
+  ],
+  "shipments": [
+    {
+      "id": "package-1",
+      "pickupLocation": {
+        "lat": 54.374739,
+        "lon": 18.516659
+      },
+      "deliveryLocation": {
+        "lat": 54.359801,
+        "lon": 18.580676
+      },
+      "pickupTimeWindow": {
+        "start": "2022-01-01T08:00:00Z",
+        "end": "2022-01-01T16:00:00Z"
+      },
+      "deliveryTimeWindow": {
+        "start": "2022-01-01T08:00:00Z",
+        "end": "2022-01-01T16:00:00Z"
+      }
+    },
+    {
+      "id": "package-2",
+      "pickupLocation": {
+        "lat": 54.374739,
+        "lon": 18.516659
+      },
+      "deliveryLocation": {
+        "lat": 54.353229,
+        "lon": 18.606323
+      },
+      "pickupTimeWindow": {
+        "start": "2022-01-01T08:00:00Z",
+        "end": "2022-01-01T16:00:00Z"
+      },
+      "deliveryTimeWindow": {
+        "start": "2022-01-01T08:00:00Z",
+        "end": "2022-01-01T16:00:00Z"
+      }
+    },
+    {
+      "id": "package-3",
+      "pickupLocation": {
+        "lat": 54.374739,
+        "lon": 18.516659
+      },
+      "deliveryLocation": {
+        "lat": 54.35116,
+        "lon": 18.65046
+      },
+      "pickupTimeWindow": {
+        "start": "2022-01-01T08:00:00Z",
+        "end": "2022-01-01T16:00:00Z"
+      },
+      "deliveryTimeWindow": {
+        "start": "2022-01-01T08:00:00Z",
+        "end": "2022-01-01T16:00:00Z"
+      }
+    },
+    {
+      "id": "package-4",
+      "pickupLocation": {
+        "lat": 54.374739,
+        "lon": 18.516659
+      },
+      "deliveryLocation": {
+        "lat": 54.35489,
+        "lon": 18.65579
+      },
+      "pickupTimeWindow": {
+        "start": "2022-01-01T08:00:00Z",
+        "end": "2022-01-01T16:00:00Z"
+      },
+      "deliveryTimeWindow": {
+        "start": "2022-01-01T08:00:00Z",
+        "end": "2022-01-01T16:00:00Z"
+      }
+    },
+    {
+      "id": "package-5",
+      "pickupLocation": {
+        "lat": 54.374739,
+        "lon": 18.516659
+      },
+      "deliveryLocation": {
+        "lat": 54.36280,
+        "lon": 18.71041
+      },
+      "pickupTimeWindow": {
+        "start": "2022-01-01T08:00:00Z",
+        "end": "2022-01-01T16:00:00Z"
+      },
+      "deliveryTimeWindow": {
+        "start": "2022-01-01T08:00:00Z",
+        "end": "2022-01-01T16:00:00Z"
+      }
+    },
+    {
+      "id": "package-6",
+      "pickupLocation": {
+        "lat": 54.374739,
+        "lon": 18.516659
+      },
+      "deliveryLocation": {
+        "lat": 54.41094,
+        "lon": 18.59157
+      },
+      "pickupTimeWindow": {
+        "start": "2022-01-01T08:00:00Z",
+        "end": "2022-01-01T16:00:00Z"
+      },
+      "deliveryTimeWindow": {
+        "start": "2022-01-01T08:00:00Z",
+        "end": "2022-01-01T16:00:00Z"
+      }
+    },
+    {
+      "id": "package-7",
+      "pickupLocation": {
+        "lat": 54.374739,
+        "lon": 18.516659
+      },
+      "deliveryLocation": {
+        "lat": 54.42371,
+        "lon": 18.58106
+      },
+      "pickupTimeWindow": {
+        "start": "2022-01-01T08:00:00Z",
+        "end": "2022-01-01T16:00:00Z"
+      },
+      "deliveryTimeWindow": {
+        "start": "2022-01-01T08:00:00Z",
+        "end": "2022-01-01T16:00:00Z"
+      }
+    }
+  ]
+}

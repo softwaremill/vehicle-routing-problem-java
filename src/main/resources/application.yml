@@ -1,0 +1,9 @@
+micronaut:
+  executors:
+    io:
+      type: fixed
+  application:
+    name: demo
+jackson:
+  serialization:
+    writeDatesAsTimestamps: false

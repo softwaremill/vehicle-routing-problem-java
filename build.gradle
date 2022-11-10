@@ -1,0 +1,61 @@
+plugins {
+    id 'java'
+
+    id "io.freefair.lombok" version "6.5.1"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("io.micronaut.application") version "3.6.3"
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    annotationProcessor("io.micronaut:micronaut-http-validation")
+
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut:micronaut-jackson-databind")
+    implementation("io.micronaut:micronaut-validation")
+    implementation("io.micronaut.reactor:micronaut-reactor")
+    implementation("io.micronaut.reactor:micronaut-reactor-http-client")
+
+    implementation("jakarta.annotation:jakarta.annotation-api")
+    implementation("io.vavr:vavr:0.10.4")
+    implementation("org.apache.commons:commons-collections4:4.4")
+
+    implementation 'com.graphhopper:graphhopper-core:6.2'
+    implementation 'com.graphhopper:jsprit-core:1.8'
+
+    runtimeOnly("ch.qos.logback:logback-classic")
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testImplementation 'org.assertj:assertj-core:3.23.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    mainClass.set("org.example.geo.Application")
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion("17")
+    targetCompatibility = JavaVersion.toVersion("17")
+}
+
+graalvmNative.toolchainDetection = false
+micronaut {
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("org.example.geo.*")
+    }
+}
+
