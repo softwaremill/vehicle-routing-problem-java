@@ -8,29 +8,29 @@ import org.example.geo.output.Job;
 import org.example.geo.output.JobType;
 import org.example.geo.output.Route;
 import org.example.geo.output.Routes;
+import org.example.geo.url.RouteUrlCreator;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
 class FromJspritMappers {
 
-    static Routes toRoutes(VehicleRoutingProblemSolution solution) {
-        return new Routes(solution.getRoutes().stream().map(FromJspritMappers::toRoute).toList());
+    static Routes toRoutes(VehicleRoutingProblemSolution solution, RouteUrlCreator routeUrlCreator) {
+        return new Routes(solution.getRoutes().stream().map(route -> toRoute(route, routeUrlCreator)).toList());
     }
 
-    private static Route toRoute(VehicleRoute route) {
+    private static Route toRoute(VehicleRoute route, RouteUrlCreator routeUrlCreator) {
         return new Route(
                 route.getVehicle().getId(),
                 getJobs(route),
-                getMapUrl(route)
+                getMapUrl(route, routeUrlCreator)
         );
     }
 
-    private static List<Job> getJobs(VehicleRoute route) {
+    public static List<Job> getJobs(VehicleRoute route) {
         return getTourActivityStream(route)
                 .map(FromJspritMappers::toJob).toList();
     }
@@ -39,17 +39,9 @@ class FromJspritMappers {
         return Stream.concat(Stream.concat(Stream.of(route.getStart()), route.getActivities().stream()), Stream.of(route.getEnd()));
     }
 
-    private static String getMapUrl(VehicleRoute route) {
-        var locations = getTourActivityStream(route).map(act -> ((Coordinates) act.getLocation().getUserData()).key()).toList();
-        var uniqueStops = new ArrayList<String>();
-        for (var location : locations) {
-            if (!uniqueStops.isEmpty() && uniqueStops.get(uniqueStops.size() - 1).equals(location)) {
-                continue;
-            }
-            uniqueStops.add(location);
-        }
-        var query = String.join("/", uniqueStops);
-        return "https://www.google.pl/maps/dir/" + query;
+    private static String getMapUrl(VehicleRoute route, RouteUrlCreator routeUrlCreator) {
+        var coordinates = getTourActivityStream(route).map(act -> ((Coordinates) act.getLocation().getUserData())).toList();
+        return routeUrlCreator.create(coordinates);
     }
 
     private static Job toJob(TourActivity activity) {

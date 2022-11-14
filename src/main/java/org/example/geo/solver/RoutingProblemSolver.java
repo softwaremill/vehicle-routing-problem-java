@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.geo.distancematrix.DistanceMatrix;
 import org.example.geo.input.RoutingProblem;
 import org.example.geo.output.Routes;
+import org.example.geo.url.RouteUrlCreator;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -16,16 +17,17 @@ public class RoutingProblemSolver {
     private static final int MAX_ITERATIONS = 1000;
 
     private final VehicleRoutingAlgorithm vehicleRoutingAlgorithm;
+    private final RouteUrlCreator routeUrlCreator;
 
-    public static RoutingProblemSolver from(RoutingProblem routingProblem, DistanceMatrix distanceMatrix) {
+    public static RoutingProblemSolver from(RoutingProblem routingProblem, DistanceMatrix distanceMatrix, RouteUrlCreator routeUrlCreator) {
         var locations = Locations.from(routingProblem);
-        return new RoutingProblemSolver(createAlgorithm(routingProblem, distanceMatrix, locations));
+        return new RoutingProblemSolver(createAlgorithm(routingProblem, distanceMatrix, locations), routeUrlCreator);
     }
 
     public Routes solve() {
         var solutions = vehicleRoutingAlgorithm.searchSolutions();
         return solutions.stream().findFirst()
-                .map(FromJspritMappers::toRoutes)
+                .map(solution -> FromJspritMappers.toRoutes(solution, routeUrlCreator))
                 .orElseThrow();
     }
 

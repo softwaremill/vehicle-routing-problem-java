@@ -9,13 +9,15 @@ import org.example.geo.distancematrix.DistanceMatrix;
 import org.example.geo.input.Coordinates;
 import org.example.geo.util.Distance;
 
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.Locale;
 
 @Singleton
 public class GraphHopperDistanceProvider implements DistanceProvider {
 
-    public static String DATA_FILE = ".data/pomorskie-latest.osm.pbf";
+    public static String DATA_DIR = ".data";
+    public static String PBF_FILE_NAME = "data.osm.pbf";
 
     private final GraphHopper graphHopper;
 
@@ -25,7 +27,7 @@ public class GraphHopperDistanceProvider implements DistanceProvider {
 
     private static GraphHopper createGraphHopperInstance() {
         var hopper = new GraphHopper();
-        hopper.setOSMFile(DATA_FILE);
+        hopper.setOSMFile(Paths.get(DATA_DIR, PBF_FILE_NAME).toString());
         hopper.setGraphHopperLocation(".cache/routing-graph");
         hopper.setProfiles(new Profile("car").setVehicle("car").setWeighting("fastest").setTurnCosts(false));
         hopper.getCHPreparationHandler().setCHProfiles(new CHProfile("car"));

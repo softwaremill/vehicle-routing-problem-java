@@ -6,6 +6,7 @@ import io.micronaut.http.client.HttpClient;
 import io.micronaut.http.client.annotation.Client;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
+import org.example.geo.distancematrix.provider.GraphHopperDistanceProvider;
 import org.example.geo.output.Route;
 import org.example.geo.output.Routes;
 import org.junit.jupiter.api.BeforeAll;
@@ -23,6 +24,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @MicronautTest
 class RoutingProblemSolverControllerTest {
 
+    static final String OSM_URL = "http://download.openstreetmap.fr/extracts/europe/poland/pomorskie-latest.osm.pbf";
+
     @Inject
     @Client("/")
     HttpClient client;
@@ -32,12 +35,11 @@ class RoutingProblemSolverControllerTest {
 
     @BeforeAll
     static void setUp() throws IOException {
-        var file = ".data/pomorskie-latest.osm.pbf";
-        if (!new File(file).exists()) {
-            var url = "http://download.openstreetmap.fr/extracts/europe/poland/pomorskie-latest.osm.pbf";
-            var stream = new URL(url).openStream();
-            new File(".data").mkdir();
-            Files.copy(stream, Paths.get(file), StandardCopyOption.REPLACE_EXISTING);
+        var destination = Paths.get(GraphHopperDistanceProvider.DATA_DIR, GraphHopperDistanceProvider.PBF_FILE_NAME);
+        if (!destination.toFile().exists()) {
+            var stream = new URL(OSM_URL).openStream();
+            new File(GraphHopperDistanceProvider.DATA_DIR).mkdir();
+            Files.copy(stream, destination, StandardCopyOption.REPLACE_EXISTING);
         }
     }
 
