@@ -44,7 +44,7 @@ class IntegrationTest {
     }
 
     @Test
-    void testHello() throws IOException {
+    void shouldSolveRoutingProblem() throws IOException {
         var body = new String(resourceLoader.getResourceAsStream("request.json").orElseThrow().readAllBytes());
         var request = HttpRequest.POST("/routing-problem", body);
         var response = client.toBlocking().retrieve(request, Routes.class);
