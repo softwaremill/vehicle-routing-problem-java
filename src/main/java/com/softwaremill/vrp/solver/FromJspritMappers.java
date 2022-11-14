@@ -19,7 +19,10 @@ import java.util.stream.Stream;
 class FromJspritMappers {
 
     static Routes toRoutes(VehicleRoutingProblemSolution solution, RouteUrlCreator routeUrlCreator) {
-        return new Routes(solution.getRoutes().stream().map(route -> toRoute(route, routeUrlCreator)).toList());
+        return new Routes(
+                solution.getRoutes().stream().map(route -> toRoute(route, routeUrlCreator)).toList(),
+                solution.getUnassignedJobs().stream().map(com.graphhopper.jsprit.core.problem.job.Job::getId).toList()
+        );
     }
 
     private static Route toRoute(VehicleRoute route, RouteUrlCreator routeUrlCreator) {
