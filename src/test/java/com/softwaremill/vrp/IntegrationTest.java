@@ -1,4 +1,4 @@
-package com.softwaremill.vrp.solver;
+package com.softwaremill.vrp;
 
 import com.softwaremill.vrp.distancematrix.provider.GraphHopperDistanceProvider;
 import com.softwaremill.vrp.output.Route;
@@ -22,7 +22,7 @@ import java.nio.file.StandardCopyOption;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @MicronautTest
-class RoutingProblemSolverControllerTest {
+class IntegrationTest {
 
     static final String OSM_URL = "http://download.openstreetmap.fr/extracts/europe/poland/pomorskie-latest.osm.pbf";
 
